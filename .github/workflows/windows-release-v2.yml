@@ -1,4 +1,4 @@
-name: Build Windows release binaries
+name: Build Windows release binaries (v2)
 on:
   release:
     types:
@@ -33,12 +33,6 @@ jobs:
       run: echo "::set-env name=build_path::'$GITHUB_WORKSPACE/BomFinder/bin/Release/netcoreapp3.1'"
     - name: Set Windows Release Path
       run: echo "::set-env name=win_release_path::$BUILD_PATH/win10-x64"
-    - name: Get Latest Release
-      uses: pozetroninc/github-action-get-latest-release@v0.3.0
-      with:
-        owner: bloodsplatter
-        repo: BomFinder
-      id: version
     - name: Zip Windows Release
       uses: TheDoctor0/zip-release@v0.3.0
       with:
