@@ -1,0 +1,43 @@
+name: Build release binaries
+on:
+  release:
+    types: [published]
+    
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.101
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build Windows
+      run: dotnet build --configuration Release --no-restore --runtime win10-x64
+    - name: Set Base Path
+      run: echo "::set-env name=build_path::'$GITHUB_WORKSPACE/BomFinder/bin/Release/netcoreapp3.1'"
+    - name: Set Windows Release Path
+      run: echo "::set-env name=win_release_path::$BUILD_PATH/win10-x64"
+    - name: Get Latest Release
+      uses: pozetroninc/github-action-get-latest-release@v0.3.0
+      with:
+        owner: bloodsplatter
+        repo: BomFinder
+      id: version
+    - name: Zip Windows Release
+      uses: TheDoctor0/zip-release@v0.3.0
+      with:
+        filename: BomFinder-${{steps.version.outpus.release}}-windows10-x64.zip
+        path: $GITHUB_WORKSPACE
+        directory: $WIN_RELEASE_PATH
+      id: windows_zip
+    - name: Action Release
+      uses: yakuhzi/action-release@v1.2.0
+      with:
+        # File to upload to the release
+        file: $GITHUB_WORKSPACE/BomFinder-${{steps.version.outpus.release}}-windows10-x64.zip
