@@ -32,7 +32,7 @@ jobs:
     - name: Build Windows
       run: dotnet build --configuration Release --runtime win10-x64
     - name: Set Base Path
-      run: echo "::set-env name=build_path::$GITHUB_WORKSPACE/BomFinder/bin/Release/netcoreapp3.1"
+      run: echo "::set-env name=BUILD_PATH::$GITHUB_WORKSPACE/BomFinder/bin/Release/netcoreapp3.1"
     - name: Debug - base path
       run: echo "::debug $BUILD_PATH"
     - name: Debug - workspace
