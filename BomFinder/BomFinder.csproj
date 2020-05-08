@@ -6,6 +6,9 @@
     <PackageProjectUrl>https://github.com/bloodsplatter/BomFinder</PackageProjectUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <RepositoryUrl>https://github.com/bloodsplatter/BomFinder</RepositoryUrl>
+    <Authors>Jonas Van der Aa</Authors>
+    <Description>BomFinder finds and possibly removes files with a UTF-8 BOM marker. If you run this on something that is not a text file, your file WILL be corrupted.</Description>
+    <PackageLicenseExpression>https://github.com/bloodsplatter/BomFinder/blob/master/LICENSE</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
