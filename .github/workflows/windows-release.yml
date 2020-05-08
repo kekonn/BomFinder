@@ -1,7 +1,12 @@
 name: Build Windows release binaries
 on:
   release:
-    types: [created, edited]
+    types:
+      - created
+      - edited
+  push:
+    branches:
+      - master
     
 
 jobs:
@@ -10,7 +15,15 @@ jobs:
     runs-on: windows-latest
 
     steps:
+    - name: Get Latest Release
+      uses: pozetroninc/github-action-get-latest-release@v0.3.0
+      with:
+        owner: bloodsplatter
+        repo: BomFinder
+      id: version
     - uses: actions/checkout@v2
+      with:
+        ref: ${{steps.version.outputs.release}}
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
@@ -32,7 +45,7 @@ jobs:
     - name: Zip Windows Release
       uses: TheDoctor0/zip-release@v0.3.0
       with:
-        filename: BomFinder-${{steps.version.outpus.release}}-windows10-x64.zip
+        filename: BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
         path: $GITHUB_WORKSPACE
         directory: $WIN_RELEASE_PATH
       id: windows_zip
