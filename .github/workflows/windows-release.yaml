@@ -2,8 +2,8 @@ name: Build Windows release binaries (v2)
 on:
   release:
     types:
-      - created
       - edited
+      - published
     
 
 jobs:
