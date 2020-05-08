@@ -40,11 +40,10 @@ jobs:
     - name: Set Windows Release Path
       run: echo "::set-env name=win_release_path::$BUILD_PATH/win10-x64"
     - name: Zip Windows Release
-      uses: TheDoctor0/zip-release@v0.3.0
-      with:
-        filename: BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
-        path: $GITHUB_WORKSPACE
-        directory: $WIN_RELEASE_PATH
+      run: 7z a $FILE $DIRECTORY
+      env:
+        FILE: BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
+        DIRECTORY: $WIN_RELEASE_PATH
       id: windows_zip
     - name: Upload files to a GitHub release
       uses: svenstaro/upload-release-action@1.0.1
