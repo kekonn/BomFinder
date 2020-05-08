@@ -4,12 +4,15 @@ on:
     types:
       - edited
       - published
+  push:
+    branches:
+      - master
     
 
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Get Latest Release
