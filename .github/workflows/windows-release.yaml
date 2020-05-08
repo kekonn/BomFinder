@@ -4,9 +4,6 @@ on:
     types:
       - edited
       - published
-  push:
-    branches:
-      - master
     
 
 jobs:
