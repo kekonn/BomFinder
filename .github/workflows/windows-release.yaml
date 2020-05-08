@@ -30,6 +30,8 @@ jobs:
         dotnet-version: 3.1.201
     - name: Install dependencies
       run: dotnet restore
+    - name: List runtimes
+      run: dotnet --list-runtimes
     - name: Build Windows
       run: dotnet build --configuration Release --no-restore --runtime win10-x64
     - name: Set Base Path
