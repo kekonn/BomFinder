@@ -33,17 +33,13 @@ jobs:
       run: dotnet build --configuration Release --runtime win10-x64
     - name: Set Base Path
       run: echo "::set-env name=BUILD_PATH::$GITHUB_WORKSPACE/BomFinder/bin/Release/netcoreapp3.1"
-    - name: Debug - base path
-      run: echo "::debug $BUILD_PATH"
-    - name: Debug - workspace
-      run: echo "::debug $GITHUB_WORKSPACE"
     - name: Set Windows Release Path
       id: win_release
       run: echo "::set-output name=path::$BUILD_PATH/win10-x64"
     - name: Zip Windows Release
       run: 7z a $FILE $DIRECTORY
       env:
-        FILE: BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
+        FILE: $GITHUB_WORKSPACE/BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
         DIRECTORY: ${{steps.win_release.outputs.path}}
       id: windows_zip
     - name: Upload files to a GitHub release
@@ -51,4 +47,5 @@ jobs:
       with:
         repo_token: ${{secrets.GITHUB_TOKEN}}
         tag: ${{steps.version.outputs.release}}
+        asset_name: BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
         file: $GITHUB_WORKSPACE/BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
