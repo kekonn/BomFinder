@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BomFinder": {
+      "commandName": "Project",
+      "commandLineArgs": "find -s \"*.cs\" -d \"d:\\source\\jellyfin\""
+    }
+  }
+}
