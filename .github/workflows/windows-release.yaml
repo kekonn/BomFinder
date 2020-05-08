@@ -34,7 +34,7 @@ jobs:
     - name: List runtimes
       run: dotnet --list-runtimes
     - name: Build Windows
-      run: dotnet build --configuration Release --no-restore --runtime win10-x64
+      run: dotnet build --configuration Release --runtime win10-x64
     - name: Set Base Path
       run: echo "::set-env name=build_path::'$GITHUB_WORKSPACE/BomFinder/bin/Release/netcoreapp3.1'"
     - name: Set Windows Release Path
