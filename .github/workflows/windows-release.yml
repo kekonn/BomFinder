@@ -1,4 +1,4 @@
-name: Build release binaries
+name: Build Windows release binaries
 on:
   release:
     types: [created, edited]
