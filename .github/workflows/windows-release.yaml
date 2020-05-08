@@ -45,8 +45,9 @@ jobs:
         path: $GITHUB_WORKSPACE
         directory: $WIN_RELEASE_PATH
       id: windows_zip
-    - name: Action Release
-      uses: yakuhzi/action-release@v1.2.0
+    - name: Upload files to a GitHub release
+      uses: svenstaro/upload-release-action@1.0.1
       with:
-        # File to upload to the release
-        file: $GITHUB_WORKSPACE/BomFinder-${{steps.version.outpus.release}}-windows10-x64.zip
+        repo_token: ${{secrets.GITHUB_TOKEN}}
+        tag: ${{steps.version.outputs.release}}
+        file: $GITHUB_WORKSPACE/BomFinder-${{steps.version.outputs.release}}-windows10-x64.zip
